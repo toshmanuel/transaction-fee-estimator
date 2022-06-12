@@ -27,6 +27,10 @@ def fee_conversion(fee):
 @app.post(api_version("/fee-target-block"))
 def fee_rate(inputs:int,outputs:int,tx_type:str, target_block:int):
     from api.v1.fee_rate_per_confirmation import calculate_fee_base_on_block_confirmation_target
-    fee = calculate_fee_base_on_block_confirmation_target(inputs,outputs,tx_type, target_block)
+    try:
+        fee = calculate_fee_base_on_block_confirmation_target(inputs,outputs,tx_type, target_block)
+        return {'Transaction fee':fee}
+    except ValueError as e:
+        return {'error' : e.args[0]}
 
-    return {'Transaction fee':fee}
+    
