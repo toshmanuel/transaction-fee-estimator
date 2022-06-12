@@ -11,10 +11,10 @@ app = FastAPI(
 def ping():
     return {'status': 'ok'}
 
-@app.post(api_version("/fee_rate"))
-def fee(inputs:int,outputs:int,tx_type:str):
+@app.post(api_version("/fee"))
+def fee(num_of_inputs:int,num_of_outputs:int,tx_type:str):
     from api.v1.fee import get_fee
-    fee=get_fee(inputs,outputs,tx_type)
+    fee=get_fee(num_of_inputs,num_of_outputs,tx_type)
     return {'Transaction fee':int(fee)}
 
 @app.get(api_version("/fee_in_usd"))
