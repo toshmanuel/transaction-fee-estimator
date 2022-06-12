@@ -12,10 +12,10 @@ def ping():
     return {'status': 'ok'}
 
 @app.post(api_version("/fee_rate"))
-def fee_rate(inputs:int,outputs:int,tx_type:str):
-    from api.v1.feerate_per_vbytes import get_feerate_per_vbytes
-    fee_rate=get_feerate_per_vbytes(inputs,outputs,tx_type)
-    return {'Transaction fee':int(fee_rate)}
+def fee(inputs:int,outputs:int,tx_type:str):
+    from api.v1.fee import get_fee
+    fee=get_fee(inputs,outputs,tx_type)
+    return {'Transaction fee':int(fee)}
 
 @app.get(api_version("/fee_in_usd"))
 def fee_conversion(fee):
